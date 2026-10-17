@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMIT RAJ | The Series — Developer Portfolio</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome 6 Pro CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Custom Studio CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            netflix: {
+              red: '#E50914',
+              darkRed: '#B20710',
+              black: '#141414',
+              dark: '#0f0f0f',
+              card: '#181818',
+              cardHover: '#222222',
+              green: '#46d369',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#141414] text-white selection:bg-red-600 selection:text-white">
+
+  <!-- ==========================================
+       SCREEN 1: "WHO'S WATCHING?" PROFILE SELECTOR
+       ========================================== -->
+  <div id="who-is-watching-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#141414] transition-all duration-700">
+    <div class="mb-10 flex items-center gap-2">
+      <span class="text-netflix-red font-bebas text-5xl tracking-widest font-extrabold">AMIT RAJ</span>
+      <span class="text-xs font-bold uppercase tracking-wider bg-red-600 px-2 py-0.5 rounded text-white font-mono">SERIES</span>
+    </div>
+
+    <h1 class="text-3xl md:text-5xl font-semibold mb-12 tracking-wide text-neutral-100">Who's watching?</h1>
+
+    <!-- Profile Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 max-w-4xl px-4">
+      <!-- Profile 1: Amit Raj -->
+      <div onclick="selectProfile('amit')" class="profile-card flex flex-col items-center cursor-pointer group">
+        <div class="profile-ring w-28 h-28 md:w-36 md:h-36 rounded-md overflow-hidden border-2 border-transparent group-hover:border-white transition-all duration-300 relative shadow-xl">
+          <img src="assets/amit_raj.jpg" alt="Amit Raj" class="w-full h-full object-cover">
+          <div class="absolute top-1 right-1 bg-red-600 text-[10px] font-bold px-1.5 py-0.5 rounded">MAIN</div>
+        </div>
+        <span class="profile-name mt-4 text-gray-400 group-hover:text-white text-base md:text-lg font-medium transition-colors text-center">Amit Raj</span>
+        <span class="text-[11px] text-gray-500 mt-0.5">The Full Series</span>
+      </div>
+
+      <!-- Profile 2: Recruiter -->
+      <div onclick="selectProfile('recruiter')" class="profile-card flex flex-col items-center cursor-pointer group">
+        <div class="profile-ring w-28 h-28 md:w-36 md:h-36 rounded-md overflow-hidden border-2 border-transparent group-hover:border-blue-400 transition-all duration-300 relative bg-gradient-to-br from-blue-700 to-indigo-900 flex items-center justify-center shadow-xl">
+          <i class="fa-solid fa-file-invoice text-4xl text-white group-hover:scale-110 transition-transform"></i>
+          <div class="absolute top-1 right-1 bg-blue-500 text-[10px] font-bold px-1.5 py-0.5 rounded">HIRING</div>
+        </div>
+        <span class="profile-name mt-4 text-gray-400 group-hover:text-white text-base md:text-lg font-medium transition-colors text-center">Recruiter</span>
+        <span class="text-[11px] text-gray-500 mt-0.5">Resume & Key Metrics</span>
+      </div>
+
+      <!-- Profile 3: Tech Lead / Developer -->
+      <div onclick="selectProfile('developer')" class="profile-card flex flex-col items-center cursor-pointer group">
+        <div class="profile-ring w-28 h-28 md:w-36 md:h-36 rounded-md overflow-hidden border-2 border-transparent group-hover:border-green-400 transition-all duration-300 relative bg-gradient-to-br from-emerald-700 to-teal-900 flex items-center justify-center shadow-xl">
+          <i class="fa-solid fa-code text-4xl text-white group-hover:scale-110 transition-transform"></i>
+          <div class="absolute top-1 right-1 bg-green-500 text-[10px] font-bold px-1.5 py-0.5 rounded">TECH</div>
+        </div>
+        <span class="profile-name mt-4 text-gray-400 group-hover:text-white text-base md:text-lg font-medium transition-colors text-center">Tech Lead</span>
+        <span class="text-[11px] text-gray-500 mt-0.5">Microservices & Code</span>
+      </div>
+
+      <!-- Profile 4: Founder / Client -->
+      <div onclick="selectProfile('client')" class="profile-card flex flex-col items-center cursor-pointer group">
+        <div class="profile-ring w-28 h-28 md:w-36 md:h-36 rounded-md overflow-hidden border-2 border-transparent group-hover:border-purple-400 transition-all duration-300 relative bg-gradient-to-br from-purple-700 to-fuchsia-900 flex items-center justify-center shadow-xl">
+          <i class="fa-solid fa-rocket text-4xl text-white group-hover:scale-110 transition-transform"></i>
+          <div class="absolute top-1 right-1 bg-purple-500 text-[10px] font-bold px-1.5 py-0.5 rounded">FAST</div>
+        </div>
+        <span class="profile-name mt-4 text-gray-400 group-hover:text-white text-base md:text-lg font-medium transition-colors text-center">Founder / Client</span>
+        <span class="text-[11px] text-gray-500 mt-0.5">Automation & Delivery</span>
+      </div>
+    </div>
+
+    <!-- Manage Profiles Button -->
+    <div class="mt-14">
+      <button onclick="selectProfile('amit')" class="border border-neutral-600 hover:border-white text-neutral-400 hover:text-white uppercase font-mono tracking-widest text-xs px-6 py-2.5 rounded transition-all">
+        Manage Profiles
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       MAIN NETFLIX APP INTERFACE
+       ========================================== -->
+  <div id="main-netflix-app" class="hidden min-h-screen netflix-mesh">
+
+    <!-- Sticky Navigation Bar -->
+    <header id="netflix-navbar" class="fixed top-0 left-0 right-0 z-40 px-4 md:px-12 py-3 flex items-center justify-between transition-all duration-500 bg-transparent">
+      <div class="flex items-center gap-8">
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center gap-1.5 group">
+          <span class="text-netflix-red font-bebas text-3xl md:text-4xl tracking-wider font-extrabold group-hover:scale-105 transition-transform">AMIT RAJ</span>
+          <span class="text-[10px] font-bold uppercase tracking-widest bg-red-600 px-1.5 py-0.5 rounded text-white font-mono">SERIES</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-6 text-sm text-gray-300">
+          <a href="#hero" class="hover:text-white transition-colors font-medium text-white">Home</a>
+          <a href="#full-story" class="hover:text-white transition-colors">The Story</a>
+          <a href="#top-moments" class="hover:text-white transition-colors">Top Moments</a>
+          <a href="#skill-universe" class="hover:text-white transition-colors">Skill Universe</a>
+          <a href="#originals" class="hover:text-white transition-colors">Originals</a>
+          <a href="#my-journey" class="hover:text-white transition-colors">Journey</a>
+          <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+        </nav>
+      </div>
+
+      <!-- Right Header Actions -->
+      <div class="flex items-center gap-5">
+        <!-- Resume Download Fast Action -->
+        <button onclick="openResumeModal()" class="hidden sm:flex items-center gap-2 text-xs font-semibold bg-neutral-800 hover:bg-neutral-700 px-3 py-1.5 rounded border border-neutral-700 transition-colors">
+          <i class="fa-solid fa-file-arrow-down text-red-500"></i>
+          <span>Resume PDF</span>
+        </button>
+
+        <!-- Notification Bell -->
+        <div class="relative group cursor-pointer">
+          <i class="fa-regular fa-bell text-lg text-gray-300 group-hover:text-white"></i>
+          <span class="absolute -top-1 -right-1 bg-red-600 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">3</span>
+          
+          <!-- Notification Dropdown -->
+          <div class="absolute right-0 mt-3 w-80 bg-neutral-900 border border-neutral-800 rounded-lg shadow-2xl p-4 hidden group-hover:block transition-all z-50 text-xs">
+            <h4 class="font-bold text-gray-200 mb-2 border-b border-neutral-800 pb-2">Recent Episodes & Alerts</h4>
+            <div class="space-y-3">
+              <div class="flex gap-2">
+                <span class="text-green-400 font-bold">✔</span>
+                <p class="text-gray-300">Autonomous Job Applier reached <strong>1,523+ live applications</strong> with 0 bans.</p>
+              </div>
+              <div class="flex gap-2">
+                <span class="text-red-400 font-bold">⚡</span>
+                <p class="text-gray-300">Decreased API latency by <strong>38%</strong> via CompletableFuture async execution.</p>
+              </div>
+              <div class="flex gap-2">
+                <span class="text-blue-400 font-bold">🚀</span>
+                <p class="text-gray-300">Backend microservice handling <strong>50k+ daily transactions</strong> at Anantixia.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Switch Profile Dropdown -->
+        <div onclick="switchProfileScreen()" class="flex items-center gap-2 cursor-pointer group" title="Switch Watching Profile">
+          <div class="w-8 h-8 rounded overflow-hidden border border-transparent group-hover:border-white transition-all">
+            <img src="assets/amit_raj.jpg" alt="Profile" class="w-full h-full object-cover">
+          </div>
+          <i class="fa-solid fa-caret-down text-xs text-gray-400 group-hover:text-white"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- Custom Profile Notification Banner -->
+    <div id="profile-custom-banner" class="hidden fixed top-16 left-1/2 -translate-x-1/2 z-30 bg-neutral-900/95 border border-red-600/50 text-white text-xs px-4 py-2 rounded-full shadow-2xl backdrop-blur-md flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-red-500 live-pulse"></span>
+      <span id="profile-custom-text">Custom profile activated</span>
+      <button onclick="document.getElementById('profile-custom-banner').classList.add('hidden')" class="ml-2 text-gray-400 hover:text-white">&times;</button>
+    </div>
+
+
+    <!-- ==========================================
+         HERO BILLBOARD SECTION
+         ========================================== -->
+    <section id="hero" class="relative min-h-[90vh] md:min-h-screen flex items-center pt-24 pb-16 px-4 md:px-12 overflow-hidden">
+      <!-- Ambient Lighting Embers -->
+      <div class="absolute -top-40 -left-40 w-96 h-96 bg-red-600/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+        
+        <!-- Left Column: Title, Metadata, Synopsis & CTAs -->
+        <div class="lg:col-span-7 space-y-5">
+          <!-- Series Badge -->
+          <div class="flex items-center gap-2">
+            <span class="text-netflix-red font-bold text-xs tracking-widest uppercase flex items-center gap-1 font-mono">
+              <span class="w-2 h-2 bg-red-600 rounded-sm"></span> ORIGINAL SDE PRODUCTION
+            </span>
+          </div>
+
+          <!-- Series Title -->
+          <h1 class="font-bebas text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight leading-none text-white drop-shadow-2xl">
+            AMIT RAJ
+          </h1>
+          <div class="text-lg md:text-xl font-bold uppercase tracking-widest text-neutral-400 -mt-2">
+            THE SERIES • PRODUCTION SEASON
+          </div>
+
+          <!-- Metadata Tags -->
+          <div class="flex flex-wrap items-center gap-3 text-xs md:text-sm font-semibold pt-1">
+            <span class="text-green-400 font-bold">99% Match</span>
+            <span class="text-gray-400">2024–Present</span>
+            <span class="border border-neutral-700 px-1.5 py-0.5 rounded text-[11px] text-gray-300">2+ YRS EXP</span>
+            <span class="border border-neutral-700 px-1.5 py-0.5 rounded text-[11px] text-gray-300">ULTRA HD</span>
+            <span class="text-gray-400 font-mono">Java 21 (LTS) • Spring Boot • Python AI</span>
+          </div>
+
+          <!-- Headline Role -->
+          <p class="text-sm md:text-base font-semibold text-red-500 uppercase tracking-wide">
+            Backend SDE (Java & Spring Boot) • Distributed Systems • Autonomous AI Automation
+          </p>
+
+          <!-- Synopsis Description -->
+          <p class="text-gray-300 text-sm md:text-base leading-relaxed max-w-2xl">
+            Performance-driven Backend Engineer at <strong>Anantixia Pvt. Ltd.</strong> architecting high-throughput microservices handling <strong>50k+ daily transactions</strong>. Specialist in high-concurrency pipelines, asynchronous non-blocking execution (<strong>38% latency drop</strong>), and autonomous AI stealth automation (<strong>1,523+ live submissions</strong> with 100% bot evasion).
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center gap-4 pt-4">
+            <!-- Play Trailer Button -->
+            <button onclick="openTrailerModal()" class="flex items-center gap-2.5 bg-white hover:bg-neutral-200 text-black font-bold px-6 md:px-8 py-3 rounded text-sm md:text-base transition-all transform hover:scale-105 shadow-xl">
+              <i class="fa-solid fa-play text-base"></i>
+              <span>Play Trailer</span>
+            </button>
+
+            <!-- View Resume Button -->
+            <button onclick="openResumeModal()" class="flex items-center gap-2.5 bg-neutral-800/80 hover:bg-neutral-700 text-white font-semibold px-6 md:px-7 py-3 rounded text-sm md:text-base border border-neutral-700 backdrop-blur-md transition-all transform hover:scale-105">
+              <i class="fa-solid fa-file-pdf text-red-500"></i>
+              <span>View Resume</span>
+            </button>
+
+            <!-- My List Button -->
+            <button id="my-list-btn" onclick="toggleMyList()" class="flex items-center gap-2 bg-neutral-800/80 hover:bg-neutral-700 text-gray-300 font-medium px-4 py-3 rounded text-sm border border-neutral-700 transition-colors">
+              <i class="fa-solid fa-plus"></i>
+              <span>My List</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Amit Raj's Photo Hero with Cinematic Vignette -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end relative">
+          <div class="relative w-72 h-80 sm:w-96 sm:h-[460px] lg:w-[420px] lg:h-[500px]">
+            <!-- Red Ambient Glow Behind Head -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-red-600/30 via-transparent to-blue-600/20 rounded-2xl filter blur-xl"></div>
+            
+            <!-- Ken Burns Animated Photo Container -->
+            <div class="w-full h-full rounded-2xl overflow-hidden relative border border-neutral-800/60 shadow-2xl">
+              <img src="assets/amit_raj.jpg" alt="Amit Raj - Backend Engineer" class="w-full h-full object-cover ken-burns">
+              
+              <!-- Dark Cinematic Vignette Gradient Overlays -->
+              <div class="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-[#141414]/80 via-transparent to-transparent"></div>
+
+              <!-- Top-Right Netflix Live Series Badge -->
+              <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-md border border-neutral-700 px-3 py-1.5 rounded-full flex items-center gap-2 text-xs">
+                <span class="w-2 h-2 rounded-full bg-green-400 live-pulse"></span>
+                <span class="font-mono text-gray-200">OPEN TO WORK</span>
+              </div>
+
+              <!-- Bottom Floating Stats Pill -->
+              <div class="absolute bottom-4 left-4 right-4 bg-neutral-900/90 backdrop-blur-md border border-neutral-800 p-3 rounded-lg flex items-center justify-between text-xs">
+                <div>
+                  <div class="text-[10px] text-gray-400 uppercase font-mono">Current Station</div>
+                  <div class="font-bold text-gray-100">Anantixia Pvt. Ltd.</div>
+                </div>
+                <div class="h-6 w-px bg-neutral-800"></div>
+                <div>
+                  <div class="text-[10px] text-gray-400 uppercase font-mono">Throughput</div>
+                  <div class="font-bold text-green-400">50,000+ txns/day</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         CAROUSEL 1: "CONTINUE EXPLORING" (EPISODES)
+         ========================================== -->
+    <section class="px-4 md:px-12 py-8 -mt-8 relative z-20">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl md:text-2xl font-bold tracking-wide flex items-center gap-2">
+          <span>Continue Exploring</span>
+          <span class="text-xs text-gray-400 font-normal hidden sm:inline">• Binge the engineering journey</span>
+        </h2>
+        <!-- Arrow Controls -->
+        <div class="flex items-center gap-2">
+          <button onclick="scrollCarousel('episodes-carousel', -1)" class="w-8 h-8 rounded-full bg-neutral-800/80 hover:bg-neutral-700 flex items-center justify-center transition-colors">
+            <i class="fa-solid fa-chevron-left text-xs text-gray-300"></i>
+          </button>
+          <button onclick="scrollCarousel('episodes-carousel', 1)" class="w-8 h-8 rounded-full bg-neutral-800/80 hover:bg-neutral-700 flex items-center justify-center transition-colors">
+            <i class="fa-solid fa-chevron-right text-xs text-gray-300"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Horizontal Sliding Rail -->
+      <div id="episodes-carousel" class="flex gap-4 overflow-x-auto no-scrollbar py-4 scroll-smooth">
+        <!-- Episode 1: The Full Story -->
+        <a href="#full-story" class="netflix-card flex-none w-64 md:w-72 bg-neutral-900 rounded-lg overflow-hidden border border-neutral-800 cursor-pointer block group">
+          <div class="h-36 bg-gradient-to-br from-red-950 via-neutral-900 to-black p-4 flex flex-col justify-between relative">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-red-500 font-bold">EPISODE 01</span>
+            <div>
+              <h3 class="font-bold text-base text-white group-hover:text-red-400 transition-colors">THE FULL STORY</h3>
+              <p class="text-xs text-gray-400">Anantixia Experience & B.Tech</p>
+            </div>
+            <div class="episode-progress">
+              <div class="episode-progress-fill" style="width: 85%;"></div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Episode 2: Top Moments -->
+        <a href="#top-moments" class="netflix-card flex-none w-64 md:w-72 bg-neutral-900 rounded-lg overflow-hidden border border-neutral-800 cursor-pointer block group">
+          <div class="h-36 bg-gradient-to-br from-blue-950 via-neutral-900 to-black p-4 flex flex-col justify-between relative">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-blue-400 font-bold">EPISODE 02</span>
+            <div>
+              <h3 class="font-bold text-base text-white group-hover:text-blue-400 transition-colors">TOP MOMENTS</h3>
+              <p class="text-xs text-gray-400">50k Txns, 38% Latency Cut</p>
+            </div>
+            <div class="episode-progress">
+              <div class="episode-progress-fill" style="width: 70%;"></div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Episode 3: Skill Universe -->
+        <a href="#skill-universe" class="netflix-card flex-none w-64 md:w-72 bg-neutral-900 rounded-lg overflow-hidden border border-neutral-800 cursor-pointer block group">
+          <div class="h-36 bg-gradient-to-br from-emerald-950 via-neutral-900 to-black p-4 flex flex-col justify-between relative">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-green-400 font-bold">EPISODE 03</span>
+            <div>
+              <h3 class="font-bold text-base text-white group-hover:text-green-400 transition-colors">SKILL UNIVERSE</h3>
+              <p class="text-xs text-gray-400">Java 21, Spring, Kafka, Redis</p>
+            </div>
+            <div class="episode-progress">
+              <div class="episode-progress-fill" style="width: 95%;"></div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Episode 4: Originals -->
+        <a href="#originals" class="netflix-card flex-none w-64 md:w-72 bg-neutral-900 rounded-lg overflow-hidden border border-neutral-800 cursor-pointer block group">
+          <div class="h-36 bg-gradient-to-br from-purple-950 via-neutral-900 to-black p-4 flex flex-col justify-between relative">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-purple-400 font-bold">EPISODE 04</span>
+            <div>
+              <h3 class="font-bold text-base text-white group-hover:text-purple-400 transition-colors">FEATURED ORIGINALS</h3>
+              <p class="text-xs text-gray-400">Autonomous AI Job Applier & APIs</p>
+            </div>
+            <div class="episode-progress">
+              <div class="episode-progress-fill" style="width: 90%;"></div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Episode 5: About Me -->
+        <a href="#about" class="netflix-card flex-none w-64 md:w-72 bg-neutral-900 rounded-lg overflow-hidden border border-neutral-800 cursor-pointer block group">
+          <div class="h-36 bg-gradient-to-br from-amber-950 via-neutral-900 to-black p-4 flex flex-col justify-between relative">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">EPISODE 05</span>
+            <div>
+              <h3 class="font-bold text-base text-white group-hover:text-amber-400 transition-colors">ABOUT ME</h3>
+              <p class="text-xs text-gray-400">Philosophy, Mindset & Goals</p>
+            </div>
+            <div class="episode-progress">
+              <div class="episode-progress-fill" style="width: 60%;"></div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Episode 6: Journey -->
+        <a href="#my-journey" class="netflix-card flex-none w-64 md:w-72 bg-neutral-900 rounded-lg overflow-hidden border border-neutral-800 cursor-pointer block group">
+          <div class="h-36 bg-gradient-to-br from-neutral-800 via-neutral-900 to-black p-4 flex flex-col justify-between relative">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-gray-400 font-bold">EPISODE 06</span>
+            <div>
+              <h3 class="font-bold text-base text-white group-hover:text-red-400 transition-colors">THE JOURNEY</h3>
+              <p class="text-xs text-gray-400">Seasons 1, 2 & 3</p>
+            </div>
+            <div class="episode-progress">
+              <div class="episode-progress-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 2: "THE FULL STORY" (EXPERIENCE & EDUCATION)
+         ========================================== -->
+    <section id="full-story" class="px-4 md:px-12 py-16 max-w-7xl mx-auto">
+      <div class="border-t border-neutral-800 pt-10">
+        <span class="text-xs font-mono font-bold text-red-500 uppercase tracking-widest">THE SCREENPLAY</span>
+        <h2 class="font-bebas text-4xl md:text-6xl text-white tracking-wide mt-1 mb-8">THE FULL STORY</h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- Experience Breakdown (Left) -->
+          <div class="lg:col-span-8 space-y-8">
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 md:p-8 relative">
+              <div class="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-800 pb-4 mb-6">
+                <div>
+                  <span class="text-xs font-mono text-red-500 uppercase font-semibold">LEAD ROLE</span>
+                  <h3 class="text-xl md:text-2xl font-bold text-white">Anantixia Pvt. Ltd.</h3>
+                  <p class="text-sm text-gray-400">Backend Engineer • Gurgaon, India</p>
+                </div>
+                <div class="text-right">
+                  <span class="bg-neutral-800 border border-neutral-700 text-xs px-3 py-1 rounded font-mono text-gray-300">May 2024 – Present</span>
+                </div>
+              </div>
+
+              <!-- Bullet Points from Resume -->
+              <ul class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-angle-right text-red-500 mt-1"></i>
+                  <span>Architected and scaled robust <strong>REST APIs and backend microservices</strong> using <strong>Java 21, Spring Boot, Hibernate, and JPA</strong>, handling over <strong>50k+ daily transactions</strong>.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-angle-right text-red-500 mt-1"></i>
+                  <span>Engineered an asynchronous task execution system using <strong>Java ExecutorService and CompletableFuture</strong>, decoupling blocking notification workflows and <strong>decreasing API latency by 38%</strong>.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-angle-right text-red-500 mt-1"></i>
+                  <span>Optimized relational persistence by tuning JPA fetch plans and indexing MySQL/PostgreSQL tables, <strong>reducing database CPU load by 40%</strong> during peak traffic.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-angle-right text-red-500 mt-1"></i>
+                  <span>Designed fault-tolerant inter-service communication via <strong>Spring WebClient</strong> with automated retry and exponential backoff, boosting cross-service reliability to <strong>99.8%</strong>.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-angle-right text-red-500 mt-1"></i>
+                  <span>Implemented stateless <strong>JWT authentication</strong> and granular <strong>Role-Based Access Control (RBAC)</strong> using Spring Security filters to protect sensitive enterprise endpoints.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-angle-right text-red-500 mt-1"></i>
+                  <span>Authored comprehensive automated test suites with <strong>JUnit 5, Mockito, and MockMvc</strong> across controller, service, and data layers, raising code coverage from <strong>45% to 70%+</strong>.</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <i class="fa-solid fa-angle-right text-red-500 mt-1"></i>
+                  <span>Investigated production incidents and conducted root-cause analysis (RCA) using <strong>Kibana and ELK centralized logging</strong>, reducing Mean Time to Resolution (MTTR) by <strong>30%</strong>.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Education -->
+            <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 md:p-8">
+              <span class="text-xs font-mono text-blue-400 uppercase font-semibold">ACADEMIC FOUNDATION</span>
+              <div class="flex flex-wrap items-center justify-between gap-2 mt-2 mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-white">Government Engineering College, Banka</h3>
+                  <p class="text-sm text-gray-400">Bachelor of Technology (B.Tech) • Banka, Bihar</p>
+                </div>
+                <div class="text-right">
+                  <span class="bg-neutral-800 border border-neutral-700 text-xs px-3 py-1 rounded font-mono text-gray-300">2019 – 2023 | CGPA: 7.74</span>
+                </div>
+              </div>
+              <p class="text-xs text-gray-400">Core Foundations: Data Structures & Algorithms, Operating Systems, Database Management Systems, Computer Networks, and Distributed Computing.</p>
+            </div>
+          </div>
+
+          <!-- Quick Production Stats (Right) -->
+          <div class="lg:col-span-4 space-y-6">
+            <div class="bg-neutral-900/90 border border-neutral-800 rounded-xl p-6">
+              <h4 class="text-sm font-bold uppercase tracking-wider text-gray-300 mb-4 pb-2 border-b border-neutral-800 flex items-center justify-between">
+                <span>Every episode, on one page</span>
+                <i class="fa-solid fa-circle-info text-red-500"></i>
+              </h4>
+              <div class="space-y-4">
+                <div>
+                  <div class="text-xs text-gray-400 font-mono">STARING ACTOR</div>
+                  <div class="text-base font-bold text-white">Amit Raj</div>
+                </div>
+                <div>
+                  <div class="text-xs text-gray-400 font-mono">PRIMARY STACK</div>
+                  <div class="text-sm font-medium text-gray-200">Java 21, Spring Boot, MySQL, Kafka, Python</div>
+                </div>
+                <div>
+                  <div class="text-xs text-gray-400 font-mono">DAILY API THROUGHPUT</div>
+                  <div class="text-sm font-bold text-green-400">50,000+ Transactions / Day</div>
+                </div>
+                <div>
+                  <div class="text-xs text-gray-400 font-mono">SYSTEM RELIABILITY</div>
+                  <div class="text-sm font-bold text-blue-400">99.8% with Automated Retry</div>
+                </div>
+                <div>
+                  <div class="text-xs text-gray-400 font-mono">LATENCY REDUCTION</div>
+                  <div class="text-sm font-bold text-purple-400">-38% via CompletableFuture</div>
+                </div>
+                <div>
+                  <div class="text-xs text-gray-400 font-mono">TEST COVERAGE</div>
+                  <div class="text-sm font-bold text-amber-400">70%+ with JUnit 5 & Mockito</div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-neutral-800">
+                <button onclick="openResumeModal()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 rounded text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-file-pdf"></i> Download Official Resume
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 3: "TOP MOMENTS" (METRICS & AWARDS)
+         ========================================== -->
+    <section id="top-moments" class="px-4 md:px-12 py-16 max-w-7xl mx-auto">
+      <div class="border-t border-neutral-800 pt-10">
+        <span class="text-xs font-mono font-bold text-blue-400 uppercase tracking-widest">AWARDS & PRODUCTION HIGHLIGHTS</span>
+        <h2 class="font-bebas text-4xl md:text-6xl text-white tracking-wide mt-1 mb-8">TOP MOMENTS</h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <!-- Metric 1 -->
+          <div class="bg-neutral-900/80 border border-neutral-800 hover:border-red-600/50 p-5 rounded-xl transition-all hover:-translate-y-1">
+            <i class="fa-solid fa-bolt text-2xl text-red-500 mb-3"></i>
+            <div class="text-2xl md:text-3xl font-extrabold text-white">50K+</div>
+            <div class="text-xs font-semibold text-gray-300 mt-1">Daily Transactions</div>
+            <p class="text-[11px] text-gray-500 mt-2">Production Spring Boot microservices scaled at Anantixia.</p>
+          </div>
+
+          <!-- Metric 2 -->
+          <div class="bg-neutral-900/80 border border-neutral-800 hover:border-green-600/50 p-5 rounded-xl transition-all hover:-translate-y-1">
+            <i class="fa-solid fa-gauge-high text-2xl text-green-400 mb-3"></i>
+            <div class="text-2xl md:text-3xl font-extrabold text-white">-38%</div>
+            <div class="text-xs font-semibold text-gray-300 mt-1">API Latency Cut</div>
+            <p class="text-[11px] text-gray-500 mt-2">Decoupled via ExecutorService & CompletableFuture.</p>
+          </div>
+
+          <!-- Metric 3 -->
+          <div class="bg-neutral-900/80 border border-neutral-800 hover:border-blue-600/50 p-5 rounded-xl transition-all hover:-translate-y-1">
+            <i class="fa-solid fa-shield-halved text-2xl text-blue-400 mb-3"></i>
+            <div class="text-2xl md:text-3xl font-extrabold text-white">1,523+</div>
+            <div class="text-xs font-semibold text-gray-300 mt-1">Live Applications</div>
+            <p class="text-[11px] text-gray-500 mt-2">Autonomous Playwright bot bypassing Akamai detection.</p>
+          </div>
+
+          <!-- Metric 4 -->
+          <div class="bg-neutral-900/80 border border-neutral-800 hover:border-purple-600/50 p-5 rounded-xl transition-all hover:-translate-y-1">
+            <i class="fa-solid fa-vial-circle-check text-2xl text-purple-400 mb-3"></i>
+            <div class="text-2xl md:text-3xl font-extrabold text-white">70%+</div>
+            <div class="text-xs font-semibold text-gray-300 mt-1">Test Coverage</div>
+            <p class="text-[11px] text-gray-500 mt-2">Enforced with JUnit 5, Mockito & JaCoCo gates.</p>
+          </div>
+
+          <!-- Metric 5 -->
+          <div class="bg-neutral-900/80 border border-neutral-800 hover:border-amber-600/50 p-5 rounded-xl transition-all hover:-translate-y-1">
+            <i class="fa-solid fa-server text-2xl text-amber-400 mb-3"></i>
+            <div class="text-2xl md:text-3xl font-extrabold text-white">99.8%</div>
+            <div class="text-xs font-semibold text-gray-300 mt-1">Inter-Service Uptime</div>
+            <p class="text-[11px] text-gray-500 mt-2">Spring WebClient retry logic & circuit breaker resilience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 4: "MY SKILL UNIVERSE" (CATEGORIZED MATRIX)
+         ========================================== -->
+    <section id="skill-universe" class="px-4 md:px-12 py-16 max-w-7xl mx-auto">
+      <div class="border-t border-neutral-800 pt-10">
+        <span class="text-xs font-mono font-bold text-green-400 uppercase tracking-widest">TECHNICAL STACK & CAPABILITIES</span>
+        <h2 class="font-bebas text-4xl md:text-6xl text-white tracking-wide mt-1 mb-8">MY SKILL UNIVERSE</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 bg-neutral-900/40 border border-neutral-800 rounded-xl p-6">
+          
+          <!-- Category Nav Tabs (Left) -->
+          <div class="md:col-span-4 space-y-1">
+            <button onclick="showSkillTab('backend')" data-tab="backend" class="skill-nav-btn w-full text-left px-4 py-3 rounded text-sm font-semibold border-l-4 border-red-600 bg-neutral-900 text-white transition-all flex items-center justify-between">
+              <span>Backend & Microservices</span>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+            <button onclick="showSkillTab('languages')" data-tab="languages" class="skill-nav-btn w-full text-left px-4 py-3 rounded text-sm font-semibold border-l-4 border-transparent text-gray-400 hover:text-white transition-all flex items-center justify-between">
+              <span>Languages & Web</span>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+            <button onclick="showSkillTab('distributed')" data-tab="distributed" class="skill-nav-btn w-full text-left px-4 py-3 rounded text-sm font-semibold border-l-4 border-transparent text-gray-400 hover:text-white transition-all flex items-center justify-between">
+              <span>Distributed Systems & Concurrency</span>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+            <button onclick="showSkillTab('databases')" data-tab="databases" class="skill-nav-btn w-full text-left px-4 py-3 rounded text-sm font-semibold border-l-4 border-transparent text-gray-400 hover:text-white transition-all flex items-center justify-between">
+              <span>Databases & Storage</span>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+            <button onclick="showSkillTab('devops')" data-tab="devops" class="skill-nav-btn w-full text-left px-4 py-3 rounded text-sm font-semibold border-l-4 border-transparent text-gray-400 hover:text-white transition-all flex items-center justify-between">
+              <span>DevOps, Cloud & CI/CD</span>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+            <button onclick="showSkillTab('testing')" data-tab="testing" class="skill-nav-btn w-full text-left px-4 py-3 rounded text-sm font-semibold border-l-4 border-transparent text-gray-400 hover:text-white transition-all flex items-center justify-between">
+              <span>Testing, Quality & Monitoring</span>
+              <i class="fa-solid fa-chevron-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Dynamic Skill Content (Right) -->
+          <div class="md:col-span-8 p-4">
+            
+            <!-- Pane 1: Backend -->
+            <div id="skill-pane-backend" class="skill-tab-pane space-y-4">
+              <h3 class="text-lg font-bold text-white border-b border-neutral-800 pb-2">Backend Frameworks & Architecture</h3>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-red-400">Spring Boot 3</div>
+                  <div class="text-xs text-gray-400">Microservices Core</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">Spring Security</div>
+                  <div class="text-xs text-gray-400">JWT, RBAC Filters</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">Spring Data JPA</div>
+                  <div class="text-xs text-gray-400">Hibernate 6, Fetch Plans</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">RESTful APIs</div>
+                  <div class="text-xs text-gray-400">High-Throughput</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">Spring WebClient</div>
+                  <div class="text-xs text-gray-400">Non-blocking HTTP</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">FastAPI (Python)</div>
+                  <div class="text-xs text-gray-400">Async Inference Endpoints</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 2: Languages -->
+            <div id="skill-pane-languages" class="skill-tab-pane hidden space-y-4">
+              <h3 class="text-lg font-bold text-white border-b border-neutral-800 pb-2">Programming Languages & Web</h3>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-red-400">Java 21 (LTS)</div>
+                  <div class="text-xs text-gray-400">Primary Enterprise Language</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">Python 3.12</div>
+                  <div class="text-xs text-gray-400">Automation, AI & Scraping</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">SQL</div>
+                  <div class="text-xs text-gray-400">Complex Queries & Indexing</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">JavaScript / ES6+</div>
+                  <div class="text-xs text-gray-400">DOM Automation & Web UI</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">HTML5 / CSS3</div>
+                  <div class="text-xs text-gray-400">Tailwind CSS & Responsive UI</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 3: Distributed Systems -->
+            <div id="skill-pane-distributed" class="skill-tab-pane hidden space-y-4">
+              <h3 class="text-lg font-bold text-white border-b border-neutral-800 pb-2">Distributed Systems & Concurrency</h3>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-red-400">Apache Kafka</div>
+                  <div class="text-xs text-gray-400">Event-Driven Streams</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">Redis</div>
+                  <div class="text-xs text-gray-400">Distributed Cache & Locks</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">CompletableFuture</div>
+                  <div class="text-xs text-gray-400">Java Asynchronous Pipelines</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">ExecutorService</div>
+                  <div class="text-xs text-gray-400">Thread Pool Tuning</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 4: Databases -->
+            <div id="skill-pane-databases" class="skill-tab-pane hidden space-y-4">
+              <h3 class="text-lg font-bold text-white border-b border-neutral-800 pb-2">Databases & Query Optimization</h3>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-red-400">MySQL</div>
+                  <div class="text-xs text-gray-400">Production Relational DB</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">PostgreSQL</div>
+                  <div class="text-xs text-gray-400">Complex Joins & JSONB</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">MongoDB</div>
+                  <div class="text-xs text-gray-400">Document Store</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">SQLite</div>
+                  <div class="text-xs text-gray-400">Zero-Config Local Vault</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 5: DevOps -->
+            <div id="skill-pane-devops" class="skill-tab-pane hidden space-y-4">
+              <h3 class="text-lg font-bold text-white border-b border-neutral-800 pb-2">DevOps, Cloud & Workflows</h3>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-red-400">Docker</div>
+                  <div class="text-xs text-gray-400">Containerized Microservices</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">Jenkins CI/CD</div>
+                  <div class="text-xs text-gray-400">Automated Build & Test</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">Git & GitHub Actions</div>
+                  <div class="text-xs text-gray-400">Automated Sprints</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">Google Workflows</div>
+                  <div class="text-xs text-gray-400">Workspace Automation</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">Postman & Swagger</div>
+                  <div class="text-xs text-gray-400">API Documentation</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pane 6: Testing -->
+            <div id="skill-pane-testing" class="skill-tab-pane hidden space-y-4">
+              <h3 class="text-lg font-bold text-white border-b border-neutral-800 pb-2">Testing & Observability</h3>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-red-400">JUnit 5 & Mockito</div>
+                  <div class="text-xs text-gray-400">Unit & Mock Testing</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">MockMvc</div>
+                  <div class="text-xs text-gray-400">Controller Integration</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">ELK Stack & Kibana</div>
+                  <div class="text-xs text-gray-400">Centralized Logging (RCA)</div>
+                </div>
+                <div class="bg-neutral-800/80 p-3 rounded border border-neutral-700">
+                  <div class="font-bold text-sm text-white">Grafana</div>
+                  <div class="text-xs text-gray-400">Metrics & Monitoring</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 5: "NETFLIX ORIGINALS" (FLAGSHIP PROJECTS)
+         ========================================== -->
+    <section id="originals" class="px-4 md:px-12 py-16 max-w-7xl mx-auto">
+      <div class="border-t border-neutral-800 pt-10">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <span class="text-xs font-mono font-bold text-red-500 uppercase tracking-widest">STUDIO ORIGINALS</span>
+            <h2 class="font-bebas text-4xl md:text-6xl text-white tracking-wide mt-1">FLAGSHIP PRODUCTIONS</h2>
+          </div>
+          <!-- Slider Buttons -->
+          <div class="flex items-center gap-2">
+            <button onclick="scrollCarousel('projects-carousel', -1)" class="w-9 h-9 rounded-full bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors">
+              <i class="fa-solid fa-chevron-left text-xs text-gray-300"></i>
+            </button>
+            <button onclick="scrollCarousel('projects-carousel', 1)" class="w-9 h-9 rounded-full bg-neutral-800 hover:bg-neutral-700 flex items-center justify-center transition-colors">
+              <i class="fa-solid fa-chevron-right text-xs text-gray-300"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Horizontal Sliding Rail -->
+        <div id="projects-carousel" class="flex gap-6 overflow-x-auto no-scrollbar py-6 scroll-smooth">
+          
+          <!-- Project 1: AutoApply AI -->
+          <div onclick="openProjectModal('autoapply')" class="netflix-card flex-none w-80 md:w-96 bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 cursor-pointer group shadow-2xl">
+            <div class="h-48 overflow-hidden relative">
+              <img src="assets/project_autoapply.png" alt="AutoApply AI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-red-600 text-[10px] font-bold px-2 py-0.5 rounded font-mono uppercase">ORIGINAL</span>
+              <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-[11px] text-green-400 font-bold px-2 py-0.5 rounded">99% Match</span>
+            </div>
+            <div class="p-5 space-y-2">
+              <h3 class="font-bold text-lg text-white group-hover:text-red-500 transition-colors">Autonomous AI Job Applier & Stealth Engine</h3>
+              <p class="text-xs text-gray-400 line-clamp-2">Autonomous Playwright engine with Akamai bot shield bypass and 1,523+ live submitted jobs.</p>
+              <div class="flex flex-wrap gap-1.5 pt-2">
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Python</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Playwright</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Gemini AI</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">SQLite</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Homework Management -->
+          <div onclick="openProjectModal('homework')" class="netflix-card flex-none w-80 md:w-96 bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 cursor-pointer group shadow-2xl">
+            <div class="h-48 overflow-hidden relative bg-gradient-to-br from-indigo-950 via-neutral-900 to-black p-4 flex flex-col justify-end">
+              <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-red-600 text-[10px] font-bold px-2 py-0.5 rounded font-mono uppercase">ORIGINAL</span>
+              <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-[11px] text-green-400 font-bold px-2 py-0.5 rounded">98% Match</span>
+              <i class="fa-solid fa-network-wired text-4xl text-indigo-500 mb-2"></i>
+            </div>
+            <div class="p-5 space-y-2">
+              <h3 class="font-bold text-lg text-white group-hover:text-indigo-400 transition-colors">Homework Management Microservices</h3>
+              <p class="text-xs text-gray-400 line-clamp-2">Scalable REST microservices with Spring WebClient and ExecutorService for 5,000+ student groups.</p>
+              <div class="flex flex-wrap gap-1.5 pt-2">
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Java 21</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Spring Boot</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">WebClient</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">MySQL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3: Student Management -->
+          <div onclick="openProjectModal('student')" class="netflix-card flex-none w-80 md:w-96 bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 cursor-pointer group shadow-2xl">
+            <div class="h-48 overflow-hidden relative bg-gradient-to-br from-blue-950 via-neutral-900 to-black p-4 flex flex-col justify-end">
+              <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-red-600 text-[10px] font-bold px-2 py-0.5 rounded font-mono uppercase">ORIGINAL</span>
+              <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-[11px] text-green-400 font-bold px-2 py-0.5 rounded">97% Match</span>
+              <i class="fa-solid fa-user-graduate text-4xl text-blue-500 mb-2"></i>
+            </div>
+            <div class="p-5 space-y-2">
+              <h3 class="font-bold text-lg text-white group-hover:text-blue-400 transition-colors">Student Management & Onboarding Engine</h3>
+              <p class="text-xs text-gray-400 line-clamp-2">Onboarding 50k+ student records with zero race-condition unique ID generation and indexing.</p>
+              <div class="flex flex-wrap gap-1.5 pt-2">
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Java 21</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Spring Security</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Hibernate</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">JWT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4: SpeakForge AI -->
+          <div onclick="openProjectModal('speakforge')" class="netflix-card flex-none w-80 md:w-96 bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 cursor-pointer group shadow-2xl">
+            <div class="h-48 overflow-hidden relative bg-gradient-to-br from-emerald-950 via-neutral-900 to-black p-4 flex flex-col justify-end">
+              <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-red-600 text-[10px] font-bold px-2 py-0.5 rounded font-mono uppercase">ORIGINAL</span>
+              <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-[11px] text-green-400 font-bold px-2 py-0.5 rounded">96% Match</span>
+              <i class="fa-solid fa-brain text-4xl text-emerald-500 mb-2"></i>
+            </div>
+            <div class="p-5 space-y-2">
+              <h3 class="font-bold text-lg text-white group-hover:text-emerald-400 transition-colors">SpeakForge AI: Spaced Repetition Engine</h3>
+              <p class="text-xs text-gray-400 line-clamp-2">Duolingo Half-Life Regression mathematical model with Indian English syntactic GEC.</p>
+              <div class="flex flex-wrap gap-1.5 pt-2">
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Python</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">FastAPI</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Machine Learning</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">HLR</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5: Employee Hierarchy Service -->
+          <div onclick="openProjectModal('employee')" class="netflix-card flex-none w-80 md:w-96 bg-neutral-900 rounded-xl overflow-hidden border border-neutral-800 cursor-pointer group shadow-2xl">
+            <div class="h-48 overflow-hidden relative bg-gradient-to-br from-purple-950 via-neutral-900 to-black p-4 flex flex-col justify-end">
+              <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent"></div>
+              <span class="absolute top-3 left-3 bg-red-600 text-[10px] font-bold px-2 py-0.5 rounded font-mono uppercase">ORIGINAL</span>
+              <span class="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-[11px] text-green-400 font-bold px-2 py-0.5 rounded">97% Match</span>
+              <i class="fa-solid fa-users-gear text-4xl text-purple-500 mb-2"></i>
+            </div>
+            <div class="p-5 space-y-2">
+              <h3 class="font-bold text-lg text-white group-hover:text-purple-400 transition-colors">Employee & Organizational Hierarchy</h3>
+              <p class="text-xs text-gray-400 line-clamp-2">Fine-grained RBAC authorization with Spring Security Context and HikariCP connection tuning.</p>
+              <div class="flex flex-wrap gap-1.5 pt-2">
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Java 21</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">Spring Security</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">REST APIs</span>
+                <span class="text-[10px] bg-neutral-800 px-2 py-0.5 rounded text-gray-300 font-mono">RBAC</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 6: "MY JOURNEY" (SEASONS TIMELINE)
+         ========================================== -->
+    <section id="my-journey" class="px-4 md:px-12 py-16 max-w-7xl mx-auto">
+      <div class="border-t border-neutral-800 pt-10">
+        <span class="text-xs font-mono font-bold text-amber-500 uppercase tracking-widest">TIMELINE CHRONOLOGY</span>
+        <h2 class="font-bebas text-4xl md:text-6xl text-white tracking-wide mt-1 mb-8">MY JOURNEY</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Season 1 -->
+          <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 relative">
+            <span class="bg-neutral-800 text-[10px] font-mono text-gray-300 px-2.5 py-1 rounded font-bold uppercase">SEASON 01 • 2019–2023</span>
+            <h3 class="text-xl font-bold text-white mt-3 mb-1">Foundations & Core Engineering</h3>
+            <p class="text-xs text-red-500 font-mono mb-3">Government Engineering College, Banka</p>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Mastered Object-Oriented Programming, Data Structures, Algorithms in Java, relational databases (SQL), and Linux server environments. Built strong problem-solving fundamentals.
+            </p>
+          </div>
+
+          <!-- Season 2 -->
+          <div class="bg-neutral-900/60 border border-neutral-800 border-l-4 border-l-red-600 rounded-xl p-6 relative">
+            <span class="bg-red-600/20 text-[10px] font-mono text-red-400 px-2.5 py-1 rounded font-bold uppercase">SEASON 02 • 2024–PRESENT</span>
+            <h3 class="text-xl font-bold text-white mt-3 mb-1">Enterprise Scale & Production</h3>
+            <p class="text-xs text-red-500 font-mono mb-3">Anantixia Pvt. Ltd., Gurgaon</p>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Architecting microservices handling 50k+ daily transactions. Reduced latency by 38% via asynchronous concurrency and tuned database indexing for 40% CPU load reduction.
+            </p>
+          </div>
+
+          <!-- Season 3 -->
+          <div class="bg-neutral-900/60 border border-neutral-800 rounded-xl p-6 relative">
+            <span class="bg-neutral-800 text-[10px] font-mono text-gray-300 px-2.5 py-1 rounded font-bold uppercase">SEASON 03 • 2025–2026</span>
+            <h3 class="text-xl font-bold text-white mt-3 mb-1">Autonomous AI & Distributed Scale</h3>
+            <p class="text-xs text-red-500 font-mono mb-3">Open Source & Agentic Engineering</p>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Building autonomous AI agents with stealth anti-bot evasion (1,523+ live submissions), distributed Kafka event streaming, and resilient cloud architectures.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 7: "ABOUT ME" (PERSONAL PHILOSOPHY)
+         ========================================== -->
+    <section id="about" class="px-4 md:px-12 py-16 max-w-7xl mx-auto">
+      <div class="border-t border-neutral-800 pt-10">
+        <span class="text-xs font-mono font-bold text-purple-400 uppercase tracking-widest">BEHIND THE SCENES</span>
+        <h2 class="font-bebas text-4xl md:text-6xl text-white tracking-wide mt-1 mb-8">ABOUT ME</h2>
+
+        <div class="bg-neutral-900/70 border border-neutral-800 rounded-2xl p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-4 flex justify-center">
+            <div class="w-56 h-72 md:w-64 md:h-84 rounded-xl overflow-hidden border-2 border-neutral-700 shadow-2xl relative">
+              <img src="assets/amit_standing.jpg" alt="Amit Raj" class="w-full h-full object-cover object-top">
+              <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/60 to-transparent p-3 text-center">
+                <span class="text-xs font-mono text-gray-200 font-bold">Amit Raj • SDE</span>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-8 space-y-4">
+            <h3 class="text-2xl font-bold text-white">"Code is written for humans to read, and optimized for machines to execute at scale."</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              I am a performance-driven Backend Engineer who loves unraveling concurrency bottlenecks, architecting clean microservices, and eliminating human friction through autonomous AI automation. 
+            </p>
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Whether it's shaving 38% latency off production Spring Boot APIs, scaling database queries to sustain peak traffic, or orchestrating distributed bots that bypass state-of-the-art bot shields without a single ban — I focus on reliable, measurable engineering impact.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-2">
+              <div class="bg-neutral-800 px-3.5 py-2 rounded text-xs">
+                <span class="text-gray-400">Location:</span> <strong class="text-white">Gurgaon, India</strong>
+              </div>
+              <div class="bg-neutral-800 px-3.5 py-2 rounded text-xs">
+                <span class="text-gray-400">Phone:</span> <strong class="text-white">+91-7562093577</strong>
+              </div>
+              <div class="bg-neutral-800 px-3.5 py-2 rounded text-xs">
+                <span class="text-gray-400">Email:</span> <strong class="text-white">amitrajhjp123@gmail.com</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SECTION 8: "TO BE CONTINUED..." (CONTACT / FOOTER)
+         ========================================== -->
+    <section id="contact" class="px-4 md:px-12 py-20 max-w-7xl mx-auto text-center">
+      <div class="border-t border-neutral-800 pt-14 space-y-6">
+        <span class="text-xs font-mono font-bold text-red-500 uppercase tracking-widest">THE NEXT EPISODE</span>
+        <h2 class="font-bebas text-5xl md:text-8xl text-white tracking-wide">TO BE CONTINUED...</h2>
+        <p class="text-sm md:text-base text-gray-300 max-w-xl mx-auto">
+          Looking for a high-impact Backend Engineer or Autonomous AI Developer for your team? Let's connect and build the next big release together.
+        </p>
+
+        <!-- Direct Contact Actions -->
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <a href="tel:+917562093577" class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded text-sm uppercase tracking-wider transition-all transform hover:scale-105 shadow-xl">
+            <i class="fa-solid fa-phone"></i>
+            <span>Let's Talk (+91-7562093577)</span>
+          </a>
+          <a href="mailto:amitrajhjp123@gmail.com" class="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-white font-semibold px-6 py-3 rounded text-sm border border-neutral-700 transition-all transform hover:scale-105">
+            <i class="fa-solid fa-envelope text-red-500"></i>
+            <span>Email Amit</span>
+          </a>
+          <a href="https://linkedin.com/in/amitraj62" target="_blank" class="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-white font-semibold px-5 py-3 rounded text-sm border border-neutral-700 transition-all">
+            <i class="fa-brands fa-linkedin text-blue-400"></i>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://github.com/amitraz62" target="_blank" class="flex items-center gap-2 bg-neutral-800 hover:bg-neutral-700 text-white font-semibold px-5 py-3 rounded text-sm border border-neutral-700 transition-all">
+            <i class="fa-brands fa-github text-gray-300"></i>
+            <span>GitHub</span>
+          </a>
+        </div>
+
+        <!-- Watch Again / Replay Opening -->
+        <div class="pt-10 flex items-center justify-center gap-6 text-xs text-gray-500 font-mono">
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'}); soundEngine.playTaDum();" class="hover:text-white transition-colors flex items-center gap-1.5">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>WATCH AGAIN</span>
+          </button>
+          <span>•</span>
+          <button onclick="switchProfileScreen()" class="hover:text-white transition-colors flex items-center gap-1.5">
+            <i class="fa-solid fa-users"></i>
+            <span>REPLAY OPENING</span>
+          </button>
+        </div>
+
+        <div class="pt-10 text-[11px] text-gray-600 font-mono">
+          © 2026 Amit Raj. Built with pure HTML5, Tailwind CSS & Cinematic Studio UI System.
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+  <!-- ==========================================
+       MODAL 1: INTERACTIVE CINEMATIC TRAILER
+       ========================================== -->
+  <div id="trailer-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4">
+    <div class="bg-neutral-950 border border-neutral-800 rounded-2xl w-full max-w-4xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-neutral-800 flex items-center justify-between bg-neutral-900/50">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-600 live-pulse"></span>
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-red-500" id="trailer-tag">TRAILER PREVIEW</span>
+        </div>
+        <button onclick="closeTrailerModal()" class="text-gray-400 hover:text-white text-2xl font-bold leading-none">&times;</button>
+      </div>
+
+      <!-- Trailer Body -->
+      <div class="p-6 md:p-8 space-y-6 overflow-y-auto">
+        <div>
+          <h2 id="trailer-title" class="text-2xl md:text-3xl font-bold text-white mb-2">System Architecture & Production Performance</h2>
+          <span id="trailer-stat-badge" class="inline-block bg-red-600/20 text-red-400 border border-red-600/40 text-xs px-3 py-1 rounded font-mono font-bold">
+            50k+ Daily Transactions • 99.8% Reliability
+          </span>
+        </div>
+
+        <!-- Terminal Output -->
+        <div class="bg-black/80 rounded-xl p-5 border border-neutral-800 font-mono text-xs md:text-sm text-green-400 leading-relaxed shadow-inner overflow-x-auto min-h-[180px]">
+          <pre id="trailer-terminal">Initializing...</pre>
+        </div>
+
+        <!-- Slider Controls -->
+        <div class="flex items-center justify-between pt-4 border-t border-neutral-800">
+          <div class="flex items-center gap-2">
+            <span class="trailer-dot w-8 h-2.5 bg-red-600 rounded-full transition-all"></span>
+            <span class="trailer-dot w-2.5 h-2.5 bg-gray-600 rounded-full transition-all"></span>
+            <span class="trailer-dot w-2.5 h-2.5 bg-gray-600 rounded-full transition-all"></span>
+            <span class="trailer-dot w-2.5 h-2.5 bg-gray-600 rounded-full transition-all"></span>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="prevTrailerSlide()" class="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 rounded text-xs font-semibold text-gray-200">Previous</button>
+            <button onclick="nextTrailerSlide()" class="px-5 py-2 bg-red-600 hover:bg-red-700 rounded text-xs font-bold text-white">Next Episode</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       MODAL 2: OFFICIAL RESUME VIEWER
+       ========================================== -->
+  <div id="resume-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4">
+    <div class="bg-neutral-950 border border-neutral-800 rounded-2xl w-full max-w-5xl h-[90vh] flex flex-col overflow-hidden shadow-2xl relative">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-neutral-800 flex items-center justify-between bg-neutral-900/60">
+        <div class="flex items-center gap-3">
+          <i class="fa-solid fa-file-pdf text-red-500 text-lg"></i>
+          <div>
+            <h3 class="text-sm font-bold text-white">Amit_Raj_Resume.pdf</h3>
+            <p class="text-[11px] text-gray-400">Backend Engineer (Java & Spring Boot) • 2+ Years Exp</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="assets/Amit_Raj_Resume.pdf" download="Amit_Raj_Resume.pdf" class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
+            <i class="fa-solid fa-download"></i>
+            <span>Download</span>
+          </a>
+          <button onclick="closeResumeModal()" class="text-gray-400 hover:text-white text-2xl font-bold leading-none ml-2">&times;</button>
+        </div>
+      </div>
+
+      <!-- PDF Embed Viewer -->
+      <div class="flex-1 bg-neutral-900">
+        <iframe src="assets/Amit_Raj_Resume.pdf" class="w-full h-full border-none" title="Amit Raj Resume"></iframe>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==========================================
+       MODAL 3: PROJECT DETAIL (EPISODE POPUP)
+       ========================================== -->
+  <div id="project-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-xl p-4">
+    <div class="bg-neutral-950 border border-neutral-800 rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl relative flex flex-col max-h-[90vh]">
+      <!-- Header Image -->
+      <div class="h-56 relative overflow-hidden bg-neutral-900">
+        <img id="pm-image" src="" alt="Project" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent"></div>
+        <button onclick="closeProjectModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/70 hover:bg-black text-white text-xl flex items-center justify-center font-bold z-10">&times;</button>
+        <div class="absolute bottom-4 left-6 right-6">
+          <span id="pm-series" class="text-xs font-mono font-bold text-red-500 uppercase">SERIES 01 • ORIGINAL</span>
+          <h2 id="pm-title" class="text-2xl md:text-3xl font-bold text-white mt-0.5">Project Title</h2>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="p-6 md:p-8 space-y-6 overflow-y-auto">
+        <div class="flex items-center gap-3 text-xs font-semibold">
+          <span id="pm-match" class="text-green-400 font-bold">99% Match</span>
+          <span id="pm-badge" class="bg-neutral-800 px-2 py-0.5 rounded text-gray-300">Trending #1</span>
+        </div>
+
+        <p id="pm-desc" class="text-sm text-gray-300 leading-relaxed">Description goes here.</p>
+
+        <!-- Highlights -->
+        <div>
+          <h4 class="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">Key Production Highlights</h4>
+          <ul id="pm-metrics" class="space-y-1.5"></ul>
+        </div>
+
+        <!-- Tech Stack Tags -->
+        <div>
+          <h4 class="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">Technology Stack</h4>
+          <div id="pm-tags" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Actions -->
+        <div class="pt-4 border-t border-neutral-800 flex items-center justify-between">
+          <a id="pm-github" href="#" target="_blank" class="flex items-center gap-2 bg-white hover:bg-neutral-200 text-black font-bold px-5 py-2.5 rounded text-xs uppercase tracking-wider transition-colors">
+            <i class="fa-brands fa-github text-sm"></i>
+            <span>View Source Code</span>
+          </a>
+          <button onclick="closeProjectModal()" class="text-xs text-gray-400 hover:text-white font-mono">Close Episode</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-neutral-900 border border-red-600 text-white text-xs font-medium px-4 py-3 rounded-lg shadow-2xl opacity-0 translate-y-4 transition-all duration-300 pointer-events-none">
+    Notification
+  </div>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

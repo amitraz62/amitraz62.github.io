@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --netflix-red: #E50914;
+  --netflix-dark-red: #B20710;
+  --netflix-black: #141414;
+  --netflix-dark: #0b0b0b;
+  --netflix-card: #181818;
+  --netflix-card-hover: #232323;
+  --netflix-gray: #808080;
+  --netflix-light-gray: #e5e5e5;
+  --netflix-green: #46d369;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--netflix-black);
+  color: #fff;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.font-bebas {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1.5px;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #141414;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--netflix-red);
+}
+
+/* Netflix ambient background */
+.netflix-mesh {
+  background: radial-gradient(circle at 80% 20%, rgba(229, 9, 20, 0.12) 0%, transparent 40%),
+              radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.08) 0%, transparent 40%),
+              #141414;
+}
+
+/* Ken Burns slow zoom */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.ken-burns {
+  animation: kenBurns 20s ease-in-out infinite alternate;
+}
+
+/* Hero Portrait Mask */
+.hero-mask {
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 95%);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 95%);
+}
+
+.hero-vignette {
+  background: linear-gradient(90deg, #141414 0%, rgba(20, 20, 20, 0.7) 35%, rgba(20, 20, 20, 0.2) 65%, #141414 100%),
+              linear-gradient(180deg, transparent 60%, #141414 100%);
+}
+
+/* Card Zoom Effect */
+.netflix-card {
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s ease, z-index 0s 0.35s;
+  will-change: transform;
+}
+
+.netflix-card:hover {
+  transform: scale(1.08) translateY(-8px);
+  z-index: 40;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8), 0 0 20px rgba(229, 9, 20, 0.25);
+  transition-delay: 0.1s;
+}
+
+/* Profile Avatar Ring */
+.profile-ring {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.profile-card:hover .profile-ring {
+  transform: scale(1.06);
+  border-color: #fff;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+.profile-card:hover .profile-name {
+  color: #fff;
+}
+
+/* Carousel Horizontal Rail */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Progress bar inside episode cards */
+.episode-progress {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.episode-progress-fill {
+  height: 100%;
+  background: var(--netflix-red);
+}
+
+/* Pulse animation for Live Indicator */
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+.live-pulse {
+  animation: pulseDot 2s infinite ease-in-out;
+}
