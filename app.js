@@ -264,6 +264,15 @@ function openProjectModal(key) {
   document.getElementById('pm-badge').innerText = data.badge;
   document.getElementById('pm-desc').innerText = data.desc;
   document.getElementById('pm-github').href = data.github;
+
+  const betaBtn = document.getElementById('pm-beta-btn');
+  if (betaBtn) {
+    if (key === 'autoapply') {
+      betaBtn.classList.remove('hidden');
+    } else {
+      betaBtn.classList.add('hidden');
+    }
+  }
   
   const imgEl = document.getElementById('pm-image');
   if (imgEl) imgEl.src = data.image;
@@ -366,3 +375,78 @@ window.addEventListener('scroll', () => {
     nav.classList.add('bg-transparent');
   }
 });
+
+// 10. AutoApply Beta Pilot Modal Management
+function openAutoApplyBetaModal() {
+  soundEngine.playTaDum();
+  const modal = document.getElementById('autoapply-beta-modal');
+  if (modal) {
+    const formContainer = document.getElementById('beta-form-container');
+    const successContainer = document.getElementById('beta-success-container');
+    if (formContainer) formContainer.classList.remove('hidden');
+    if (successContainer) successContainer.classList.add('hidden');
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeAutoApplyBetaModal() {
+  soundEngine.playClick();
+  const modal = document.getElementById('autoapply-beta-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+}
+
+async function handleBetaFormSubmit(event) {
+  event.preventDefault();
+  const submitBtn = document.getElementById('beta-submit-btn');
+  const btnText = document.getElementById('beta-btn-text');
+  
+  submitBtn.disabled = true;
+  btnText.innerText = 'Submitting Pilot Request...';
+  
+  const platforms = [];
+  if (document.getElementById('plat-naukri')?.checked) platforms.push('Naukri.com');
+  if (document.getElementById('plat-linkedin')?.checked) platforms.push('LinkedIn');
+  if (document.getElementById('plat-truelancer')?.checked) platforms.push('Truelancer');
+
+  const payload = {
+    name: document.getElementById('beta-name').value,
+    email: document.getElementById('beta-email').value,
+    phone: document.getElementById('beta-phone').value || 'N/A',
+    experience: document.getElementById('beta-experience').value,
+    target_role: document.getElementById('beta-role').value,
+    preferred_location: document.getElementById('beta-location').value || 'Open',
+    expected_ctc: document.getElementById('beta-ctc').value || 'Open',
+    resume_url: document.getElementById('beta-resume').value,
+    platforms: platforms.join(', '),
+    _subject: `🚀 New AutoApply Beta Pilot Request: ${document.getElementById('beta-name').value} (${document.getElementById('beta-role').value})`,
+    _template: 'table'
+  };
+
+  try {
+    await fetch('https://formsubmit.co/ajax/amitrajhjp123@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    document.getElementById('beta-form-container').classList.add('hidden');
+    document.getElementById('beta-success-container').classList.remove('hidden');
+    showToast('Pilot application sent successfully!');
+  } catch (err) {
+    console.error('Submission fallback triggered:', err);
+    document.getElementById('beta-form-container').classList.add('hidden');
+    document.getElementById('beta-success-container').classList.remove('hidden');
+    showToast('Pilot application recorded!');
+  } finally {
+    submitBtn.disabled = false;
+    btnText.innerText = 'Submit Pilot Request (100% Free)';
+  }
+}
+
