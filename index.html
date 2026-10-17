@@ -1242,10 +1242,32 @@
             </div>
           </div>
 
-          <!-- Target Role / Tech Stack -->
-          <div>
-            <label class="block text-xs font-mono text-gray-300 mb-1.5">TARGET ROLE / PRIMARY TECH STACK <span class="text-red-500">*</span></label>
-            <input type="text" id="beta-role" name="target_role" required placeholder="e.g. Java Backend Developer (Spring Boot, Microservices)" class="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors">
+          <!-- Target Role / Tech Stack with Smart Autocomplete -->
+          <div class="relative">
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="block text-xs font-mono text-gray-300">TARGET ROLE / PRIMARY TECH STACK <span class="text-red-500">*</span></label>
+              <span class="text-[10px] text-gray-400 font-mono flex items-center gap-1"><i class="fa-solid fa-sparkles text-red-500"></i> Smart Suggest</span>
+            </div>
+            <div class="relative">
+              <input type="text" id="beta-role" name="target_role" required autocomplete="off" oninput="filterRoleSuggestions(this.value)" onfocus="showRoleSuggestions()" placeholder="Type 'B' for Backend, 'F' for Full Stack, etc." class="w-full bg-neutral-900 border border-neutral-700 rounded-lg pl-3.5 pr-10 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors">
+              <button type="button" onclick="showRoleSuggestions()" class="absolute right-3.5 top-3 text-xs text-gray-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+            </div>
+
+            <!-- Dynamic Autocomplete Suggestions Dropdown -->
+            <div id="role-suggestions-dropdown" class="hidden absolute left-0 right-0 mt-1.5 bg-neutral-900/95 border border-neutral-700 rounded-xl shadow-2xl z-40 max-h-56 overflow-y-auto divide-y divide-neutral-800 backdrop-blur-md">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Quick Selection Tags -->
+            <div class="flex flex-wrap items-center gap-1.5 mt-2">
+              <span class="text-[10px] text-gray-400 font-mono">Quick Pick:</span>
+              <button type="button" onclick="selectRole('Backend Engineer (Java & Spring Boot)')" class="text-[11px] bg-neutral-800 hover:bg-neutral-700 hover:text-white text-gray-300 px-2.5 py-0.5 rounded-full border border-neutral-700 transition-colors">Backend Java</button>
+              <button type="button" onclick="selectRole('Backend Developer (Python / FastAPI)')" class="text-[11px] bg-neutral-800 hover:bg-neutral-700 hover:text-white text-gray-300 px-2.5 py-0.5 rounded-full border border-neutral-700 transition-colors">Backend Python</button>
+              <button type="button" onclick="selectRole('Full Stack Developer (Java + React)')" class="text-[11px] bg-neutral-800 hover:bg-neutral-700 hover:text-white text-gray-300 px-2.5 py-0.5 rounded-full border border-neutral-700 transition-colors">Full Stack</button>
+              <button type="button" onclick="selectRole('Software Development Engineer (SDE 1/2)')" class="text-[11px] bg-neutral-800 hover:bg-neutral-700 hover:text-white text-gray-300 px-2.5 py-0.5 rounded-full border border-neutral-700 transition-colors">SDE</button>
+            </div>
           </div>
 
           <!-- Preferred Location & CTC -->
@@ -1267,22 +1289,56 @@
             <p class="text-[11px] text-gray-500 mt-1">Please ensure your Google Drive / Dropbox link has "Anyone with the link can view" permission enabled.</p>
           </div>
 
-          <!-- Target Platforms Checkboxes -->
+          <!-- Target Platforms (Multi-Select & Expandable) -->
           <div>
-            <label class="block text-xs font-mono text-gray-300 mb-2">TARGET PLATFORMS FOR RUN</label>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              <label class="flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
-                <input type="checkbox" id="plat-naukri" checked class="accent-red-600 rounded">
+            <div class="flex items-center justify-between mb-2">
+              <label class="block text-xs font-mono text-gray-300">TARGET PLATFORMS FOR RUN</label>
+              <span class="text-[10px] text-gray-400">Select or add your desired portals</span>
+            </div>
+            
+            <!-- Platforms Grid -->
+            <div id="platforms-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <label class="platform-item flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
+                <input type="checkbox" name="platform" value="Naukri.com" checked class="accent-red-600 rounded">
                 <span>Naukri.com</span>
               </label>
-              <label class="flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
-                <input type="checkbox" id="plat-linkedin" checked class="accent-red-600 rounded">
-                <span>LinkedIn Easy Apply</span>
+              <label class="platform-item flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
+                <input type="checkbox" name="platform" value="LinkedIn Easy Apply" checked class="accent-red-600 rounded">
+                <span>LinkedIn</span>
               </label>
-              <label class="flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
-                <input type="checkbox" id="plat-truelancer" checked class="accent-red-600 rounded">
+              <label class="platform-item flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
+                <input type="checkbox" name="platform" value="Indeed" checked class="accent-red-600 rounded">
+                <span>Indeed</span>
+              </label>
+              <label class="platform-item flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
+                <input type="checkbox" name="platform" value="Instahyre" checked class="accent-red-600 rounded">
+                <span>Instahyre</span>
+              </label>
+              <label class="platform-item flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
+                <input type="checkbox" name="platform" value="Hirist" class="accent-red-600 rounded">
+                <span>Hirist</span>
+              </label>
+              <label class="platform-item flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
+                <input type="checkbox" name="platform" value="Wellfound (AngelList)" class="accent-red-600 rounded">
+                <span>Wellfound</span>
+              </label>
+              <label class="platform-item flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
+                <input type="checkbox" name="platform" value="Glassdoor" class="accent-red-600 rounded">
+                <span>Glassdoor</span>
+              </label>
+              <label class="platform-item flex items-center gap-2 text-xs text-gray-300 bg-neutral-900 border border-neutral-800 p-2.5 rounded-lg cursor-pointer hover:border-neutral-700 transition-colors">
+                <input type="checkbox" name="platform" value="Truelancer / Freelance" checked class="accent-red-600 rounded">
                 <span>Truelancer</span>
               </label>
+            </div>
+
+            <!-- Custom Platform Adder -->
+            <div class="mt-2.5 flex gap-2">
+              <input type="text" id="custom-platform-input" onkeydown="if(event.key === 'Enter'){ event.preventDefault(); addCustomPlatform(); }" placeholder="+ Add any other platform (e.g. Cutshort, Foundit, Internshala)" class="flex-1 bg-neutral-900 border border-neutral-800 rounded-lg px-3.5 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-500 transition-colors">
+              <button type="button" onclick="addCustomPlatform()" class="bg-neutral-800 hover:bg-neutral-700 text-white font-bold px-3.5 py-2 rounded-lg text-xs border border-neutral-700 transition-colors flex items-center gap-1.5 whitespace-nowrap">
+                <i class="fa-solid fa-plus text-red-500"></i>
+                <span>Add Platform</span>
+              </button>
             </div>
           </div>
 

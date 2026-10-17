@@ -377,6 +377,115 @@ window.addEventListener('scroll', () => {
 });
 
 // 10. AutoApply Beta Pilot Modal Management
+const roleDatabase = [
+  { title: "Backend Engineer (Java & Spring Boot)", badge: "Trending", icon: "fa-mug-hot" },
+  { title: "Backend Developer (Python / Django / FastAPI)", badge: "Popular", icon: "fa-code" },
+  { title: "Backend SDE (Node.js & Microservices)", badge: "High Demand", icon: "fa-server" },
+  { title: "Backend Engineer (Go / Distributed Systems)", badge: "Scale", icon: "fa-cubes" },
+  { title: "Full Stack Developer (Java + React)", badge: "Top Match", icon: "fa-layer-group" },
+  { title: "Full Stack Engineer (MERN / Next.js)", badge: "Popular", icon: "fa-laptop-code" },
+  { title: "Software Development Engineer (SDE 1)", badge: "Entry Level", icon: "fa-terminal" },
+  { title: "Software Development Engineer (SDE 2)", badge: "Mid/Senior", icon: "fa-brain" },
+  { title: "Frontend Developer (React / Next.js / TypeScript)", badge: "UI/UX", icon: "fa-palette" },
+  { title: "DevOps & Cloud Engineer (AWS / Docker / K8s)", badge: "Infra", icon: "fa-cloud" },
+  { title: "Data Engineer (Spark / Kafka / Python / SQL)", badge: "Big Data", icon: "fa-database" },
+  { title: "AI / Machine Learning Engineer (LLMs / Agents)", badge: "GenAI", icon: "fa-microchip" },
+  { title: "QA Automation Engineer (Playwright / Selenium)", badge: "Testing", icon: "fa-vial" }
+];
+
+function showRoleSuggestions() {
+  const input = document.getElementById('beta-role');
+  filterRoleSuggestions(input ? input.value : '');
+}
+
+function filterRoleSuggestions(query) {
+  const dropdown = document.getElementById('role-suggestions-dropdown');
+  if (!dropdown) return;
+
+  const q = (query || '').toLowerCase().trim();
+  const matched = q === '' 
+    ? roleDatabase.slice(0, 6) 
+    : roleDatabase.filter(r => r.title.toLowerCase().includes(q));
+
+  if (matched.length === 0) {
+    dropdown.innerHTML = `
+      <div class="p-3 text-xs text-gray-400 text-center">
+        No predefined match. You can keep typing: <strong class="text-white">${query}</strong>
+      </div>
+    `;
+    dropdown.classList.remove('hidden');
+    return;
+  }
+
+  dropdown.innerHTML = matched.map(r => `
+    <div onclick="selectRole('${r.title.replace(/'/g, "\\'")}')" class="p-3 hover:bg-neutral-800 cursor-pointer transition-colors flex items-center justify-between group">
+      <div class="flex items-center gap-2.5">
+        <i class="fa-solid ${r.icon} text-red-500 text-xs w-4 text-center"></i>
+        <span class="text-xs text-gray-200 group-hover:text-white font-medium">${highlightMatch(r.title, q)}</span>
+      </div>
+      <span class="text-[10px] font-mono bg-neutral-800 text-gray-400 group-hover:text-red-400 px-2 py-0.5 rounded border border-neutral-700/60">${r.badge}</span>
+    </div>
+  `).join('');
+
+  dropdown.classList.remove('hidden');
+}
+
+function highlightMatch(text, query) {
+  if (!query) return text;
+  const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  return text.replace(regex, '<span class="text-red-400 font-bold underline">$1</span>');
+}
+
+function selectRole(roleTitle) {
+  soundEngine.playClick();
+  const input = document.getElementById('beta-role');
+  if (input) {
+    input.value = roleTitle;
+  }
+  const dropdown = document.getElementById('role-suggestions-dropdown');
+  if (dropdown) dropdown.classList.add('hidden');
+}
+
+// Close suggestion dropdown on outside click
+document.addEventListener('click', (e) => {
+  const dropdown = document.getElementById('role-suggestions-dropdown');
+  const input = document.getElementById('beta-role');
+  if (dropdown && !dropdown.contains(e.target) && e.target !== input) {
+    dropdown.classList.add('hidden');
+  }
+});
+
+// Dynamic Custom Platform Adder
+function addCustomPlatform() {
+  soundEngine.playClick();
+  const input = document.getElementById('custom-platform-input');
+  if (!input) return;
+  const name = input.value.trim();
+  if (!name) return;
+
+  const grid = document.getElementById('platforms-grid');
+  if (!grid) return;
+
+  const existing = Array.from(grid.querySelectorAll('input[name="platform"]')).map(i => i.value.toLowerCase());
+  if (existing.includes(name.toLowerCase())) {
+    showToast(`'${name}' is already in your platform list!`);
+    input.value = '';
+    return;
+  }
+
+  const label = document.createElement('label');
+  label.className = 'platform-item flex items-center gap-2 text-xs text-white bg-red-950/40 border border-red-600/60 p-2.5 rounded-lg cursor-pointer hover:border-red-500 transition-colors shadow-sm';
+  label.innerHTML = `
+    <input type="checkbox" name="platform" value="${name}" checked class="accent-red-600 rounded">
+    <span class="font-medium truncate">${name}</span>
+    <span class="ml-auto text-[9px] bg-red-600 text-white px-1.5 py-0.5 rounded font-mono font-bold">CUSTOM</span>
+  `;
+  grid.appendChild(label);
+
+  showToast(`Added '${name}' to target platforms!`);
+  input.value = '';
+}
+
 function openAutoApplyBetaModal() {
   soundEngine.playTaDum();
   const modal = document.getElementById('autoapply-beta-modal');
@@ -397,6 +506,8 @@ function closeAutoApplyBetaModal() {
     modal.classList.add('hidden');
     document.body.style.overflow = 'auto';
   }
+  const dropdown = document.getElementById('role-suggestions-dropdown');
+  if (dropdown) dropdown.classList.add('hidden');
 }
 
 async function handleBetaFormSubmit(event) {
@@ -407,10 +518,12 @@ async function handleBetaFormSubmit(event) {
   submitBtn.disabled = true;
   btnText.innerText = 'Submitting Pilot Request...';
   
-  const platforms = [];
-  if (document.getElementById('plat-naukri')?.checked) platforms.push('Naukri.com');
-  if (document.getElementById('plat-linkedin')?.checked) platforms.push('LinkedIn');
-  if (document.getElementById('plat-truelancer')?.checked) platforms.push('Truelancer');
+  // Collect all checked platforms dynamically
+  const platformCheckboxes = document.querySelectorAll('#platforms-grid input[name="platform"]:checked');
+  const platforms = Array.from(platformCheckboxes).map(cb => cb.value);
+  if (platforms.length === 0) {
+    platforms.push('Naukri.com', 'LinkedIn Easy Apply');
+  }
 
   const payload = {
     name: document.getElementById('beta-name').value,
@@ -449,4 +562,5 @@ async function handleBetaFormSubmit(event) {
     btnText.innerText = 'Submit Pilot Request (100% Free)';
   }
 }
+
 
