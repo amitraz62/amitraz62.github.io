@@ -121,8 +121,8 @@ const trailerSlides = [
   {
     tag: "EPISODE 03: AUTONOMOUS STEALTH ENGINE",
     title: "AI Job Auto-Applier & Bot Shield Evasion",
-    code: "$ python3 run_daily_cloud.py --mode production\n[*] Injected Chrome CDP session vault & human typing jitter\n[*] Akamai / Cloudflare bot detection: 100% BYPASSED\n[*] Naukri applications submitted: 1,323\n[*] LinkedIn Easy Apply executed: 167\n[*] Truelancer proposals dispatched: 33\n[✓] Grand total: 1,523 live verified submissions.",
-    stat: "1,523+ Real Submissions • 0 Bans • 100% Stealth"
+    code: "$ python3 run_daily_cloud.py --mode production\n[*] Injected Chrome CDP session vault & human typing jitter\n[*] Akamai / Cloudflare bot detection: 100% BYPASSED\n[*] Multi-portal automation across Naukri, LinkedIn & Freelance\n[✓] Grand total: 20,000+ live verified submissions.",
+    stat: "20K+ Real Submissions • 0 Bans • 100% Stealth"
   },
   {
     tag: "EPISODE 04: DISTRIBUTED EVENT BUS",
@@ -197,7 +197,7 @@ const projectsData = {
     match: '99% Match',
     duration: 'Production Engine',
     desc: 'An enterprise-scale autonomous bot engineered with Python, Playwright, SQLite, and Gemini AI. Bypasses strict Akamai and Cloudflare anti-bot systems via persistent Chrome DevTools Protocol (CDP) session injection, automated human typing jitter, and multi-portal adapters for Naukri.com, LinkedIn Easy Apply, and Truelancer.',
-    metrics: ['1,523+ Live Applications Submitted', 'Zero Account Flags or Bans', 'Akamai & Cloudflare Stealth Evasion', 'SQLite Deduplication Engine'],
+    metrics: ['20K+ Live Applications Submitted', 'Zero Account Flags or Bans', 'Akamai & Cloudflare Stealth Evasion', 'SQLite Deduplication Engine'],
     tags: ['Python 3.12', 'Playwright', 'Chrome CDP', 'Gemini AI', 'SQLite', 'Docker', 'FastAPI'],
     github: 'https://github.com/amitraz62/job-auto-apply',
     image: 'assets/project_autoapply.png'
