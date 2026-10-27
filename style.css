@@ -154,3 +154,36 @@ body {
 .live-pulse {
   animation: pulseDot 2s infinite ease-in-out;
 }
+
+/* Architecture Node Interactive Styling */
+.arch-node {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+.arch-node:hover {
+  transform: translateY(-3px);
+  border-color: rgba(229, 9, 20, 0.6) !important;
+  box-shadow: 0 10px 25px -5px rgba(229, 9, 20, 0.25);
+}
+.arch-node.active-node {
+  border-color: #E50914 !important;
+  background-color: rgba(229, 9, 20, 0.08) !important;
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.35);
+}
+
+/* Terminal JSON Syntax Highlighting */
+.json-key { color: #93c5fd; }
+.json-string { color: #86efac; }
+.json-number { color: #fde047; }
+.json-boolean { color: #f472b6; }
+.json-null { color: #cbd5e1; }
+
+/* Custom Badge Animations */
+@keyframes glowBorder {
+  0%, 100% { border-color: rgba(229, 9, 20, 0.4); }
+  50% { border-color: rgba(229, 9, 20, 0.9); }
+}
+.glowing-red-border {
+  animation: glowBorder 2.5s infinite;
+}
+
